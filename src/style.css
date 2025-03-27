@@ -1,0 +1,21 @@
+:root{
+  --primary: #4ade80;
+  --secondary: #f56565;
+  --grey: #f3f3f3;
+  
+  
+}
+
+
+*{
+  margin: 0;
+  font-size: 25px;
+}
+
+.groupInput{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
