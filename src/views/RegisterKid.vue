@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios';
+import MenuBar from '../components/MenuBar.vue';
 import Parse from 'parse/dist/parse.min.js';
+import { Menu } from 'primevue';
 //Oficial
 // Parse.initialize("pyJ2pmDqnkg39Pvf2CjhwHmM3SasEAPuZddS1B1b", "21gGRnI6APWZzLXHa51hNb3wcCHFJkwwa1czR9uy");
 // Parse.serverURL = "wss://customkids.b4a.io/";
@@ -11,6 +13,9 @@ import Parse from 'parse/dist/parse.min.js';
 
 
 export default {
+    components:{
+        MenuBar
+    },
     data(){
         return {
             nameKid: null,
@@ -201,7 +206,7 @@ export default {
 <template>
     <div class="main">
         <div class="content">
-            <h1>Registro de Kids</h1>
+            <MenuBar></MenuBar>
             <div class="organizer">
                 <div class="rigthSide">
                     <h1>Cadastro</h1>
@@ -314,7 +319,6 @@ export default {
     height: 100dvh;
 }
 .content{
-    padding: 40px;
     width: 100%;
     display: flex;
     flex-direction: column;
