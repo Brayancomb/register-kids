@@ -29,6 +29,7 @@ export default {
             idade: null,
             session: null,
             loading: false,
+            isError: false,
             familyOptions: [
                 {name: "Pai"},
                 {name: "Mae"},
@@ -44,8 +45,26 @@ export default {
                 {name: "4ª Sessão"}
             ],
             turmaOptions:[],
-
-            teste:[]
+            infant1A: null,
+            infant1B: null,
+            infant2A: null,
+            infant2B: null,
+            infant3A: null,
+            infant3B: null,
+            infant3C: null,
+            infant3D: null,
+            kids1A: null,
+            kids1B: null,
+            kids1C: null,
+            kids2A: null,
+            kids2B: null,
+            kids2C: null,
+            kids3A: null,
+            kids3B: null,
+            kids3C: null,
+            kids4A: null,
+            kids4B: null,
+            kids4C: null
         }
     },
     methods: {
@@ -61,6 +80,7 @@ export default {
             this.turmaKids = null;
             this.putParents = false;
             this.turmaOptions=[];  
+            this.isError = false; 
 
         },
         clearParentsInfo(){
@@ -99,46 +119,72 @@ export default {
 
             this.idade = anos;
 
+            if(this.idade == 3){
+                this.turmaOptions = [
+                    {name: "Infantil 1-A", count: this.infant1A},
+                    {name: "Infantil 1-B", count: this.infant1B}
+                ]
+            }
+            if(this.idade == 3){
+                this.turmaOptions = [
+                    {name: "Infantil 2-A", count: this.infant2A},
+                    {name: "Infantil 2-B", count: this.infant2B}
+                ]
+            }
+
+            if(this.idade == 4 || this.idade == 5){
+                this.turmaOptions = [
+                    {name: "Infantil 2-A", count: this.infant2A},
+                    {name: "Infantil 2-B", count: this.infant2B},
+                    {name: "Infantil 3-A", count: this.infant3A},
+                    {name: "Infantil 3-B", count: this.infant3B},
+                    {name: "Infantil 3-C", count: this.infant3C},
+                    {name: "Infantil 3-D", count: this.infant3D},
+                ]
+            }
+
             if(this.idade == 6 || this.idade == 7){
                 this.turmaOptions = [
-                    {name: "Kids 1-A"},
-                    {name: "Kids 1-B"},
-                    {name: "Kids 1-C"},
-                    {name: "Kids 2-A"},
-                    {name: "Kids 2-B"},
-                    {name: "Kids 2-C"}
+                    {name: "Kids 1-A", count: this.kids1A},
+                    {name: "Kids 1-B", count: this.kids1B},
+                    {name: "Kids 1-C", count: this.kids1C},
+                    {name: "Kids 2-A", count: this.kids2A},
+                    {name: "Kids 2-B", count: this.kids2B},
+                    {name: "Kids 2-C", count: this.kids2C}
                 ]
             }
 
             if(this.idade == 8 || this.idade == 9){
                 this.turmaOptions = [
-                    {name: "Kids 2-A"},
-                    {name: "Kids 2-B"},
-                    {name: "Kids 2-C"},
-                    {name: "Kids 3-A"},
-                    {name: "Kids 3-B"},
-                    {name: "Kids 3-C"}
+                    {name: "Kids 2-A", count: this.kids2A},
+                    {name: "Kids 2-B", count: this.kids2B},
+                    {name: "Kids 2-C", count: this.kids2C},
+                    {name: "Kids 3-A", count: this.kids3A},
+                    {name: "Kids 3-B", count: this.kids3B},
+                    {name: "Kids 3-C", count: this.kids3C}
                 ]
             }
 
             if(this.idade == 10 || this.idade == 11){
                 this.turmaOptions = [
-                    {name: "Kids 3-A"},
-                    {name: "Kids 3-B"},
-                    {name: "Kids 3-C"},
-                    {name: "Kids 4-A"},
-                    {name: "Kids 4-B"},
-                    {name: "Kids 4-C"}
+                    {name: "Kids 3-A", count: this.kids3A},
+                    {name: "Kids 3-B", count: this.kids3B},
+                    {name: "Kids 3-C", count: this.kids3C},
+                    {name: "Kids 4-A", count: this.kids4A},
+                    {name: "Kids 4-B", count: this.kids4B},
+                    {name: "Kids 4-C", count: this.kids4C}
                 ]
             }
 
-            if( this.idade > 11 || this.idade < 6){
+            if( this.idade > 11 || this.idade < 2){
                 this.turmaOptions = [];
             }
         },
         async registerKids(){
             if(!this.dateBorn && !this.turmaKids && !this.session){
-                return alert("NAO PODEMOS CONTINUAR")
+                this.isError = true;
+                this.$toast.add({ severity: 'error', summary: 'Informações Obrigatorias', detail: 'Informações marcadas obrigatorias', life: 3000 });
+                return
             }
 
             this.loading = true;
@@ -168,8 +214,12 @@ export default {
             }).catch((error) => {
                 console.error(error)
             })
+        },
+        calculatekids(x){
+            if(x + 30 > 70 ){
+                return 'danger'
+            }return 'success'
         }
-
     },
     watch:{
         dateBorn(newVal) {
@@ -209,27 +259,28 @@ export default {
             <MenuBar></MenuBar>
             <div class="organizer">
                 <div class="rigthSide">
-                    <h1>Cadastro</h1>
+                    <strong class="title">Cadastro</strong>
                     <div class="form">
-                        <div style="width: 100%;">
-                            <div class="groupInput">
-                                <span>Nome da Criança :</span>
-                                <InputText 
-                                    placeholder="Nome da Criança" 
-                                    v-model="nameKid"   
-                                />
-                            </div>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                                <div class="groupInput">
+                        <div style="width: 100%; padding: 20px;">
+                            <div style="display: flex; align-items: center;">
+                                <div class="groupInput" style="width: 90%;">
                                     <span>Data de Nascimento :</span>
                                     <InputMask 
                                         id="basic" 
                                         v-model="dateBorn" 
                                         mask="99/99/9999" 
                                         placeholder="dd/mm/yyyy"
+                                        :invalid="isError"
                                     />
                                 </div>
-                                <div style="display: flex; align-items: center; padding: 20px; font-size: 2rem;">{{ idade }}</div>
+                                <div 
+                                    style="
+                                        display: flex; 
+                                        align-items: center; 
+                                        padding: 20px; 
+                                        font-size: 2rem;
+                                    "
+                                >{{ idade }}</div>
                             </div>
                             <div class="groupInput">
                                 <span>Sessão :</span>
@@ -238,6 +289,7 @@ export default {
                                     :options="sessionOptions"
                                     optionLabel="name"
                                     placeholder="Sessão"
+                                    :invalid="isError"
                                 />      
                             </div>
                             <div class="groupInput">
@@ -247,19 +299,42 @@ export default {
                                     :options="turmaOptions"
                                     optionLabel="name"
                                     placeholder="Sessão"
-                                />      
+                                    :invalid="isError"
+                                >
+                                    <template #empty>
+                                        <div>
+                                            <span>Tente verificar a data de nascimento</span>
+                                        </div>
+                                    </template>
+                                    <template #option="slotProps">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                            <div>{{ slotProps.option.name }}</div>
+                                            <Tag :value="slotProps.option.count + 30" :severity="calculatekids(slotProps.option.count)"></Tag>
+                                        </div>
+                                    </template>
+                                </Select>      
                             </div>
                         </div>
 
-                        <div style="width: 100%;display: flex; flex-direction: column;  align-items: center;" >
+                        <div 
+                            style="width: 100%;display: flex; flex-direction: column;  align-items: center;" 
+                        >
                             <Button
-                                label="Adicionar Responsável"
+                                label="Dados Adicionais"
                                 @click="putParents = true"
                                 v-show="!putParents"
                             ></Button>
                             <div 
                                 v-show="putParents"
-                                style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                                style="width: 100%; display: flex; flex-direction: column; align-items: center;"
+                            >
+                                <div class="groupInput">
+                                    <span>Nome da Criança :</span>
+                                    <InputText 
+                                        placeholder="Nome da Criança" 
+                                        v-model="nameKid"   
+                                    />
+                                </div>
                                 <div class="groupInput">
                                     <span>Nome do Responsavel :</span>
                                     <InputText 
@@ -320,15 +395,11 @@ export default {
 }
 .content{
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: 100dvh;
 }
 .organizer{
     display: flex;
     width: 100%;
-    height: 100%;
     gap: 20px;
 }
 .rigthSide{
@@ -376,6 +447,10 @@ export default {
     word-break: break-all;
     padding: 20px;
 }
+.title{
+    font-size: 3rem;
+    font-weight: bold;
+}
 
 @media screen and (max-width: 800px) {
     .organizer{
@@ -390,6 +465,9 @@ export default {
         margin: 20px 0px;
         padding: 0px;
         box-shadow: none
+    }
+    .title{
+        font-size: 2rem;
     }
 }
 

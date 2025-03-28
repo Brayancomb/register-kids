@@ -4,6 +4,8 @@ import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
+import 'primeicons/primeicons.css'
+
 
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
@@ -19,11 +21,12 @@ import AccordionHeader from 'primevue/accordionheader';
 import AccordionContent from 'primevue/accordioncontent';
 import InputMask from 'primevue/inputmask';
 import DatePicker from 'primevue/datepicker';
+import Tag from 'primevue/tag';
 
-import Parse from 'parse/dist/parse.min.js';
+// import Parse from 'parse/dist/parse.min.js';
 
-Parse.initialize("zFnXp8duZFOLBWfnqnj9hPbPcXd1YYBv7155jKyu", "FIFzV9EkueocfjksA9RmdFbPSYuP4WCHHFOFd9L0");
-Parse.serverURL = "https://grupocidade.b4a.io/";
+// Parse.initialize("zFnXp8duZFOLBWfnqnj9hPbPcXd1YYBv7155jKyu", "FIFzV9EkueocfjksA9RmdFbPSYuP4WCHHFOFd9L0");
+// Parse.serverURL = "https://grupocidade.b4a.io/";
 
 
 const app = createApp(App)
@@ -51,6 +54,7 @@ app.component('AccordionHeader', AccordionHeader);
 app.component('AccordionContent', AccordionContent);
 app.component('InputMask', InputMask);
 app.component('DatePicker', DatePicker);
+app.component('Tag', Tag);
 
 app.use(ToastService);
 app.use(router)

@@ -5,14 +5,12 @@
   --helper-primary-dark: #011061;
   --helper-secondary-light: #FED74B;
   --helper-secondary-dark: #461B02;
-  
-  
 }
 
 
 *{
   margin: 0;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .groupInput{
