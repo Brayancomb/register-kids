@@ -2,7 +2,7 @@
 import axios from 'axios';
 import MenuBar from '../components/MenuBar.vue';
 import Parse from 'parse/dist/parse.min.js';
-import { Menu } from 'primevue';
+
 //Oficial
 // Parse.initialize("pyJ2pmDqnkg39Pvf2CjhwHmM3SasEAPuZddS1B1b", "21gGRnI6APWZzLXHa51hNb3wcCHFJkwwa1czR9uy");
 // Parse.serverURL = "wss://customkids.b4a.io/";
@@ -32,10 +32,10 @@ export default {
             isError: false,
             familyOptions: [
                 {name: "Pai"},
-                {name: "Mae"},
-                {name: "Irmao(a)"},
+                {name: "Mãe"},
+                {name: "Irmão(a)"},
                 {name: "Tio(a)"},
-                {name: "Avo(a)"},
+                {name: "Avô(ó)"},
                 {name: "Outro"}                
             ],
             sessionOptions:[
@@ -44,6 +44,14 @@ export default {
                 {name: "3ª Sessão"},
                 {name: "4ª Sessão"}
             ],
+            result:{
+                "1ª Sessão": {
+                    "Kids 2-A": 1
+                },
+                "2ª Sessão": {
+                    "Kids 4-C": 1
+                }
+            },
             turmaOptions:[],
             infant1A: null,
             infant1B: null,
@@ -64,7 +72,8 @@ export default {
             kids3C: null,
             kids4A: null,
             kids4B: null,
-            kids4C: null
+            kids4C: null,
+            timer: null
         }
     },
     methods: {
@@ -102,6 +111,66 @@ export default {
             }
         },
         calcularIdade() {
+            if(!this.session){
+                return;
+            }
+
+            const infos = this.result[this.session.name];
+
+            if (infos) {
+            Object.keys(infos).forEach(key => {
+                const valor = infos[key];
+                switch (key) {
+                    case "Infantil 1-A":
+                        this.infant1A = valor;
+                    case "Infantil 1-B":
+                        this.infant1B = valor;
+                    case "Infantil 2-A":
+                        this.infant2A = valor;
+                    case "Infantil 2-B":
+                        this.infant2B = valor;
+                    case "Infantil 3-A":
+                        this.infant3A = valor;
+                    case "Infantil 3-B":
+                        this.infant3B = valor;
+                    case "Infantil 3-C":
+                        this.infant3C = valor;
+                    case "Infantil 3-D":
+                        this.infant3D = valor;
+                    case "Kids 1-A":
+                        this.kids1A = valor;
+                    case "Kids 1-B":
+                        this.kids1B = valor;
+                    case "Kids 1-C":
+                        this.kids1C = valor;
+                    case "Kids 2-A":
+                        this.kids2A = valor;
+                    case "Kids 2-B":
+                        this.kids2B = valor;
+                    case "Kids 2-C":
+                        this.kids2C = valor;
+                    case "Kids 3-A":
+                        this.kids3A = valor;
+                    case "Kids 3-B":
+                        this.kids3B = valor;
+                    case "Kids 3-C":
+                        this.kids3C = valor;
+                    case "Kids 4-A":
+                        this.kids4A = valor;
+                    case "Kids 4-B":
+                        this.kids4B = valor;
+                    case "Kids 4-C":
+                        this.kids4C = valor;
+                    default:
+                        console.log(`Não foi possível encontrar a variável para ${key}`);
+                    }
+            });
+            } else {
+                console.log(`Não foi possível encontrar a sessão ${this.session}`);
+            }
+
+            
+
             const partes = this.dateBorn.split("/");
             const nascimento = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`);
             const hoje = new Date();
@@ -112,12 +181,14 @@ export default {
             const diaAtual = hoje.getDate();
             const diaNascimento = nascimento.getDate();
 
-            // Ajuste caso o aniversário ainda não tenha ocorrido no ano
             if (mesAtual < mesNascimento || (mesAtual === mesNascimento && diaAtual < diaNascimento)) {
                 anos--;
             }
 
             this.idade = anos;
+
+
+
 
             if(this.idade == 3){
                 this.turmaOptions = [
@@ -219,37 +290,45 @@ export default {
             if(x + 30 > 70 ){
                 return 'danger'
             }return 'success'
+        },
+        isDisabled(option) {
+            return option.count + 30 >= 70;
+        },
+        async sincroToBack(){
+            const options ={
+                url: `${import.meta.env.VITE_URL_MAIN}functions/contarTurmasPorSessao`,
+                method: 'POST',
+                headers: {
+                    'X-Parse-Application-Id': `${import.meta.env.VITE_PARSE_ID}`,
+                    'X-Parse-REST-API-Key': `${import.meta.env.VITE_API_KEY}`,
+                }
+            }
+
+            await axios.request(options).then((response) => {
+                console.log(response)
+                this.result = response.data.result
+                this.$toast.add({ severity: 'success', summary: 'Quantide Atualizada', detail: 'Sincronizado com sucesso', life: 3000 });
+            }).catch((error) => {
+                console.error(error)
+            })
         }
     },
     watch:{
         dateBorn(newVal) {
-            if (newVal?.length === 10) { // Só calcula a idade se a data estiver completa
+            if (newVal?.length === 10) {
                 this.calcularIdade();
             } else {
-                this.idade = null; // Reseta a idade enquanto a data não está completa
+                this.idade = null;
             }       
         }
     },
-    async mounted() {
-
-        // var query = new Parse.Query('nibCentral');
-        // // var query = new Parse.Query('Trips');
-        // let subscription = await query.subscribe();
-
-        // subscription.on('create', (object) => {
-        //     console.log('object created');
-        // });
-        // subscription.on('delete', (object) => {
-        //     console.log(object);
-        // });
-        // subscription.on('open', () => {
-        //     console.log('subscription opened');
-        // });
-        // subscription.on('close', () => {
-        //     console.log('subscription closed');
-        // });
+    mounted(){
+        // this.sincroToBack();
+        // this.timer = setInterval(this.sincroToBack, 2* 60 * 1000);
+    },
+    unmounted(){
+        clearInterval(this.timer);        
     }
-
 }
 </script>
 
@@ -290,6 +369,7 @@ export default {
                                     optionLabel="name"
                                     placeholder="Sessão"
                                     :invalid="isError"
+                                    @update:modelValue="calcularIdade"
                                 />      
                             </div>
                             <div class="groupInput">
@@ -298,12 +378,13 @@ export default {
                                     v-model="turmaKids"
                                     :options="turmaOptions"
                                     optionLabel="name"
-                                    placeholder="Sessão"
+                                    placeholder="Turma"
                                     :invalid="isError"
+                                    :optionDisabled="isDisabled"
                                 >
                                     <template #empty>
                                         <div>
-                                            <span>Tente verificar a data de nascimento</span>
+                                            <span>Tente verificar a data de nascimento e sessão</span>
                                         </div>
                                     </template>
                                     <template #option="slotProps">
