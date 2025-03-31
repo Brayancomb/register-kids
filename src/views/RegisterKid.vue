@@ -18,6 +18,7 @@ export default {
     },
     data(){
         return {
+            userInfos: JSON.parse(localStorage.getItem('userInfos')),
             nameKid: null,
             dateBorn: null,
             nameParent: null,
@@ -335,7 +336,8 @@ export default {
 <template>
     <div class="main">
         <div class="content">
-            <MenuBar></MenuBar>
+            <MenuBar v-if="this.userInfos.levelAcess == 0"></MenuBar>
+            <div v-else></div>
             <div class="organizer">
                 <div class="rigthSide">
                     <strong class="title">Cadastro</strong>

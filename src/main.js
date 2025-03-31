@@ -22,6 +22,7 @@ import AccordionContent from 'primevue/accordioncontent';
 import InputMask from 'primevue/inputmask';
 import DatePicker from 'primevue/datepicker';
 import Tag from 'primevue/tag';
+import SpeedDial from 'primevue/speeddial';
 
 // import Parse from 'parse/dist/parse.min.js';
 
@@ -55,6 +56,7 @@ app.component('AccordionContent', AccordionContent);
 app.component('InputMask', InputMask);
 app.component('DatePicker', DatePicker);
 app.component('Tag', Tag);
+app.component('SpeedDial', SpeedDial);
 
 app.use(ToastService);
 app.use(router)
