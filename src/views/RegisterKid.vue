@@ -324,8 +324,8 @@ export default {
         }
     },
     mounted(){
-        // this.sincroToBack();
-        // this.timer = setInterval(this.sincroToBack, 2* 60 * 1000);
+        this.sincroToBack();
+        this.timer = setInterval(this.sincroToBack, 2* 60 * 1000);
     },
     unmounted(){
         clearInterval(this.timer);        

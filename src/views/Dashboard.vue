@@ -8,7 +8,8 @@ export default{
     },
     data(){
         return{
-            result:[]            
+            result:[],
+            timer: null      
         }
     },
     methods:{
@@ -31,7 +32,8 @@ export default{
         }
     },
     mounted(){
-        this.getStatistics();
+        this.getStatistics();        
+        this.timer = setInterval(this.getStatistics, 2* 60 * 1000);
     }
 }
 </script>
