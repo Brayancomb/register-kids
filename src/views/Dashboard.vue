@@ -75,6 +75,7 @@ export default{
 .organizer{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 }
 .card{

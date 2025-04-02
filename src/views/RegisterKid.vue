@@ -85,7 +85,6 @@ export default {
             this.nameParent = null;
             this.phoneParent = null;
             this.parentesco = null;
-            this.session = null;
             this.parents = [];
             this.turmaKids = null;
             this.putParents = false;
@@ -191,7 +190,7 @@ export default {
 
 
 
-            if(this.idade == 3){
+            if(this.idade == 2){
                 this.turmaOptions = [
                     {name: "Infantil 1-A", count: this.infant1A},
                     {name: "Infantil 1-B", count: this.infant1B}
@@ -204,22 +203,32 @@ export default {
                 ]
             }
 
-            if(this.idade == 4 || this.idade == 5){
+            if( this.idade == 4 ){
                 this.turmaOptions = [
                     {name: "Infantil 2-A", count: this.infant2A},
-                    {name: "Infantil 2-B", count: this.infant2B},
+                    {name: "Infantil 2-B", count: this.infant2B}
+                ]
+            }
+
+            if( this.idade == 5 ){
+                this.turmaOptions = [
                     {name: "Infantil 3-A", count: this.infant3A},
                     {name: "Infantil 3-B", count: this.infant3B},
                     {name: "Infantil 3-C", count: this.infant3C},
                     {name: "Infantil 3-D", count: this.infant3D},
-                ]
+                ]                
             }
 
-            if(this.idade == 6 || this.idade == 7){
+            if( this.idade == 6 ){
                 this.turmaOptions = [
                     {name: "Kids 1-A", count: this.kids1A},
                     {name: "Kids 1-B", count: this.kids1B},
-                    {name: "Kids 1-C", count: this.kids1C},
+                    {name: "Kids 1-C", count: this.kids1C}
+                ]
+            }
+
+            if( this.kids = 7){
+                this.turmaOptions = [
                     {name: "Kids 2-A", count: this.kids2A},
                     {name: "Kids 2-B", count: this.kids2B},
                     {name: "Kids 2-C", count: this.kids2C}
@@ -228,9 +237,6 @@ export default {
 
             if(this.idade == 8 || this.idade == 9){
                 this.turmaOptions = [
-                    {name: "Kids 2-A", count: this.kids2A},
-                    {name: "Kids 2-B", count: this.kids2B},
-                    {name: "Kids 2-C", count: this.kids2C},
                     {name: "Kids 3-A", count: this.kids3A},
                     {name: "Kids 3-B", count: this.kids3B},
                     {name: "Kids 3-C", count: this.kids3C}
@@ -239,9 +245,6 @@ export default {
 
             if(this.idade == 10 || this.idade == 11){
                 this.turmaOptions = [
-                    {name: "Kids 3-A", count: this.kids3A},
-                    {name: "Kids 3-B", count: this.kids3B},
-                    {name: "Kids 3-C", count: this.kids3C},
                     {name: "Kids 4-A", count: this.kids4A},
                     {name: "Kids 4-B", count: this.kids4B},
                     {name: "Kids 4-C", count: this.kids4C}
@@ -341,7 +344,20 @@ export default {
             <div class="organizer">
                 <div class="rigthSide">
                     <strong class="title">Cadastro</strong>
+                    <div class="organizerSession">
+                        <div class="groupInput">
+                            <span>Sessão :</span>
+                            <Select 
+                                v-model="session"
+                                :options="sessionOptions"
+                                optionLabel="name"
+                                placeholder="Sessão"
+                                :invalid="isError"
+                            />      
+                        </div>
+                    </div>
                     <div class="form">
+                        
                         <div style="width: 100%; padding: 20px;">
                             <div style="display: flex; align-items: center;">
                                 <div class="groupInput" style="width: 90%;">
@@ -364,17 +380,6 @@ export default {
                                 >{{ idade }}</div>
                             </div>
                             <div class="groupInput">
-                                <span>Sessão :</span>
-                                <Select 
-                                    v-model="session"
-                                    :options="sessionOptions"
-                                    optionLabel="name"
-                                    placeholder="Sessão"
-                                    :invalid="isError"
-                                    @update:modelValue="calcularIdade"
-                                />      
-                            </div>
-                            <div class="groupInput">
                                 <span>Turma :</span>
                                 <Select 
                                     v-model="turmaKids"
@@ -386,7 +391,7 @@ export default {
                                 >
                                     <template #empty>
                                         <div>
-                                            <span>Tente verificar a data de nascimento e sessão</span>
+                                            <span>Data de Nascimento e Sessão precisam estar preenchidos</span>
                                         </div>
                                     </template>
                                     <template #option="slotProps">
@@ -500,7 +505,7 @@ export default {
 .form{
     display: flex; 
     gap: 30px; 
-    margin: 30px 0; 
+    margin: 10px 0; 
     width: 70%;
 }
 .cardOrganizer{
@@ -535,6 +540,10 @@ export default {
     font-weight: bold;
 }
 
+.organizerSession{
+    width: 25%;
+}
+
 @media screen and (max-width: 800px) {
     .organizer{
         flex-direction: column;
@@ -551,6 +560,9 @@ export default {
     }
     .title{
         font-size: 2rem;
+    }
+    .organizerSession{
+        width: 80%;
     }
 }
 

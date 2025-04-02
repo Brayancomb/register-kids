@@ -50,10 +50,10 @@ export default {
 </script>
 
 <template>
-    <div class="main">
+    <div class="main">  
         
         <div class="card">
-            <span>Login</span>
+            <img src="../assets/logoKidsDay.png" width="200px">
 
             <div style="width: 100%; display: flex; flex-direction: column; gap: 20px;">
 
@@ -65,7 +65,6 @@ export default {
                 />
 
                 <Password
-                    
                     v-model="password"
                     placeholder="Password"
                     :feedback="false"
@@ -94,13 +93,41 @@ export default {
     align-items: center;
     width: 100dvw;
     height: 100dvh;
+
 }
 .card{
-    padding: 30px;
+    padding: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    border: 1px solid var(--primary);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 6px 22px 36px 13px rgba(0,0,0,0.1);
+}
+
+.main {
+  background: linear-gradient(74deg,#34edda,#5e6cc9,#70f4ac);
+  background-size: 180% 180%;
+  animation: gradient-animation 15s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+    .main{
+        width: 100dvw;
+        height: 100lvh;
+    }
 }
 </style>

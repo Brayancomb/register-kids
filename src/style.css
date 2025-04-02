@@ -20,3 +20,9 @@
   margin-bottom: 10px;
   width: 100%;
 }
+
+@media screen and (max-width: 800px) {
+  .p-toast{
+    width: 90% !important;
+  }
+}
