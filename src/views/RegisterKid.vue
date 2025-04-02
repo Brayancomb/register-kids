@@ -45,14 +45,7 @@ export default {
                 {name: "3ª Sessão"},
                 {name: "4ª Sessão"}
             ],
-            result:{
-                "1ª Sessão": {
-                    "Kids 2-A": 1
-                },
-                "2ª Sessão": {
-                    "Kids 4-C": 1
-                }
-            },
+            result: null,
             turmaOptions:[],
             infant1A: null,
             infant1B: null,
@@ -74,6 +67,7 @@ export default {
             kids4A: null,
             kids4B: null,
             kids4C: null,
+            excedente: null,
             timer: null
         }
     },
@@ -115,61 +109,37 @@ export default {
                 return;
             }
 
-            const infos = this.result[this.session.name];
+            //////////////////////////////////
 
-            if (infos) {
-            Object.keys(infos).forEach(key => {
-                const valor = infos[key];
-                switch (key) {
-                    case "Infantil 1-A":
-                        this.infant1A = valor;
-                    case "Infantil 1-B":
-                        this.infant1B = valor;
-                    case "Infantil 2-A":
-                        this.infant2A = valor;
-                    case "Infantil 2-B":
-                        this.infant2B = valor;
-                    case "Infantil 3-A":
-                        this.infant3A = valor;
-                    case "Infantil 3-B":
-                        this.infant3B = valor;
-                    case "Infantil 3-C":
-                        this.infant3C = valor;
-                    case "Infantil 3-D":
-                        this.infant3D = valor;
-                    case "Kids 1-A":
-                        this.kids1A = valor;
-                    case "Kids 1-B":
-                        this.kids1B = valor;
-                    case "Kids 1-C":
-                        this.kids1C = valor;
-                    case "Kids 2-A":
-                        this.kids2A = valor;
-                    case "Kids 2-B":
-                        this.kids2B = valor;
-                    case "Kids 2-C":
-                        this.kids2C = valor;
-                    case "Kids 3-A":
-                        this.kids3A = valor;
-                    case "Kids 3-B":
-                        this.kids3B = valor;
-                    case "Kids 3-C":
-                        this.kids3C = valor;
-                    case "Kids 4-A":
-                        this.kids4A = valor;
-                    case "Kids 4-B":
-                        this.kids4B = valor;
-                    case "Kids 4-C":
-                        this.kids4C = valor;
-                    default:
-                        console.log(`Não foi possível encontrar a variável para ${key}`);
-                    }
-            });
-            } else {
-                console.log(`Não foi possível encontrar a sessão ${this.session}`);
-            }
+            const filter = this.result[this.session.name]
+            
+            console.log(filter)
+
+            this.infant1A = filter["Infantil 1-A"] ?? 0;
+            this.infant1B = filter["Infantil 1-B"] ?? 0;
+            this.infant2A = filter["Infantil 2-A"] ?? 0;
+            this.infant2B = filter["Infantil 2-B"] ?? 0;
+            this.infant3A = filter["Infantil 3-A"] ?? 0;
+            this.infant3B = filter["Infantil 3-B"] ?? 0;
+            this.infant3C = filter["Infantil 3-C"] ?? 0;
+            this.infant3D = filter["Infantil 3-D"] ?? 0;
+            this.kids1A = filter["Kids 1-A"] ?? 0;
+            this.kids1B = filter["Kids 1-B"] ?? 0;
+            this.kids1C = filter["Kids 1-C"] ?? 0;
+            this.kids2A = filter["Kids 2-A"] ?? 0;
+            this.kids2B = filter["Kids 2-B"] ?? 0;
+            this.kids2C = filter["Kids 2-C"] ?? 0;
+            this.kids3A = filter["Kids 3-A"] ?? 0;
+            this.kids3B = filter["Kids 3-B"] ?? 0;
+            this.kids3C = filter["Kids 3-C"] ?? 0;
+            this.kids4A = filter["Kids 4-A"] ?? 0;
+            this.kids4B = filter["Kids 4-B"] ?? 0;
+            this.kids4C = filter["Kids 4-C"] ?? 0;
+            this.excedente = filter["Excedente"] ?? 0;
+            
 
             
+            //////////////////////////////////////////////////
 
             const partes = this.dateBorn.split("/");
             const nascimento = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`);
@@ -193,20 +163,23 @@ export default {
             if(this.idade == 2){
                 this.turmaOptions = [
                     {name: "Infantil 1-A", count: this.infant1A},
-                    {name: "Infantil 1-B", count: this.infant1B}
+                    {name: "Infantil 1-B", count: this.infant1B},
+                    {name: "Excendente", count: this.excedente}
                 ]
             }
             if(this.idade == 3){
                 this.turmaOptions = [
                     {name: "Infantil 2-A", count: this.infant2A},
-                    {name: "Infantil 2-B", count: this.infant2B}
+                    {name: "Infantil 2-B", count: this.infant2B},
+                    {name: "Excendente", count: this.excedente}
                 ]
             }
 
             if( this.idade == 4 ){
                 this.turmaOptions = [
                     {name: "Infantil 2-A", count: this.infant2A},
-                    {name: "Infantil 2-B", count: this.infant2B}
+                    {name: "Infantil 2-B", count: this.infant2B},
+                    {name: "Excendente", count: this.excedente}
                 ]
             }
 
@@ -216,6 +189,7 @@ export default {
                     {name: "Infantil 3-B", count: this.infant3B},
                     {name: "Infantil 3-C", count: this.infant3C},
                     {name: "Infantil 3-D", count: this.infant3D},
+                    {name: "Excendente", count: this.excedente}
                 ]                
             }
 
@@ -223,7 +197,8 @@ export default {
                 this.turmaOptions = [
                     {name: "Kids 1-A", count: this.kids1A},
                     {name: "Kids 1-B", count: this.kids1B},
-                    {name: "Kids 1-C", count: this.kids1C}
+                    {name: "Kids 1-C", count: this.kids1C},
+                    {name: "Excendente", count: this.excedente}
                 ]
             }
 
@@ -231,7 +206,8 @@ export default {
                 this.turmaOptions = [
                     {name: "Kids 2-A", count: this.kids2A},
                     {name: "Kids 2-B", count: this.kids2B},
-                    {name: "Kids 2-C", count: this.kids2C}
+                    {name: "Kids 2-C", count: this.kids2C},
+                    {name: "Excendente", count: this.excedente}
                 ]
             }
 
@@ -239,7 +215,8 @@ export default {
                 this.turmaOptions = [
                     {name: "Kids 3-A", count: this.kids3A},
                     {name: "Kids 3-B", count: this.kids3B},
-                    {name: "Kids 3-C", count: this.kids3C}
+                    {name: "Kids 3-C", count: this.kids3C},
+                    {name: "Excendente", count: this.excedente}
                 ]
             }
 
@@ -247,7 +224,8 @@ export default {
                 this.turmaOptions = [
                     {name: "Kids 4-A", count: this.kids4A},
                     {name: "Kids 4-B", count: this.kids4B},
-                    {name: "Kids 4-C", count: this.kids4C}
+                    {name: "Kids 4-C", count: this.kids4C},
+                    {name: "Excendente", count: this.excedente}
                 ]
             }
 
