@@ -70,6 +70,7 @@ export default {
                     :feedback="false"
                     toggleMask
                     :invalid="error"
+                    @keyup.enter="login()"
                 />
 
             </div>

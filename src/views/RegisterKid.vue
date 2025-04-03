@@ -68,7 +68,49 @@ export default {
             kids4B: null,
             kids4C: null,
             excedente: null,
-            timer: null
+            baseInfantil1A: null,
+            baseInfantil1B: null,
+            baseInfantil2A: null,
+            baseInfantil2B: null,
+            baseInfantil3A: null,
+            baseInfantil3B: null,
+            baseInfantil3C: null,
+            baseInfantil3D: null,
+            baseKids1A: null,
+            baseKids1B: null,
+            baseKids1C: null,
+            baseKids2A: null,
+            baseKids2B: null,
+            baseKids2C: null,
+            baseKids3A: null,
+            baseKids3B: null,
+            baseKids3C: null,
+            baseKids4A: null,
+            baseKids4B: null,
+            baseKids4C: null,
+            baseExcedente: 0,
+            timer: null,
+            maxInfant1A: null,
+            maxInfant1B: null,
+            maxInfant2A: null,
+            maxInfant2B: null,
+            maxInfant3A: null,
+            maxInfant3B: null,
+            maxInfant3C: null,
+            maxInfant3D: null,
+            maxKids1A: null,
+            maxKids1B: null,
+            maxKids1C: null,
+            maxKids2A: null,
+            maxKids2B: null,
+            maxKids2C: null,
+            maxKids3A: null,
+            maxKids3B: null,
+            maxKids3C: null,
+            maxKids4A: null,
+            maxKids4B: null,
+            maxKids4C: null,
+            maxExcedente: 300
         }
     },
     methods: {
@@ -83,8 +125,48 @@ export default {
             this.turmaKids = null;
             this.putParents = false;
             this.turmaOptions=[];  
-            this.isError = false; 
-
+            this.isError = false;
+            this.infant1A= null;
+            this.infant1B= null;
+            this.infant2A= null;
+            this.infant2B= null;
+            this.infant3A= null;
+            this.infant3B= null;
+            this.infant3C= null;
+            this.infant3D= null;
+            this.kids1A= null;
+            this.kids1B= null;
+            this.kids1C= null;
+            this.kids2A= null;
+            this.kids2B= null;
+            this.kids2C= null;
+            this.kids3A= null;
+            this.kids3B= null;
+            this.kids3C= null;
+            this.kids4A= null;
+            this.kids4B= null;
+            this.kids4C= null;
+            this.excedente= null;
+            this.baseInfantil1A= null;
+            this.baseInfantil1B= null;
+            this.baseInfantil2A= null;
+            this.baseInfantil2B= null;
+            this.baseInfantil3A= null;
+            this.baseInfantil3B= null;
+            this.baseInfantil3C= null;
+            this.baseInfantil3D= null;
+            this.baseKids1A= null;
+            this.baseKids1B= null;
+            this.baseKids1C= null;
+            this.baseKids2A= null;
+            this.baseKids2B= null;
+            this.baseKids2C= null;
+            this.baseKids3A= null;
+            this.baseKids3B= null;
+            this.baseKids3C= null;
+            this.baseKids4A= null;
+            this.baseKids4B= null;
+            this.baseKids4C= null;
         },
         clearParentsInfo(){
             this.nameParent = null;
@@ -108,8 +190,183 @@ export default {
             if(!this.session){
                 return;
             }
-
+            
+            this.cleanData()
             this.turmaOptions = [];
+
+            ////////////////////////////////////
+
+            if( this.session.name == "1ª Sessão" ){
+                this.baseInfantil1A= 15;
+                this.maxInfant1A = 40;
+                this.baseInfantil1B= 18;
+                this.maxInfant1B = 43;
+                this.baseInfantil2A= 27;
+                this.maxInfant2A = 52;
+                this.baseInfantil2B= 28;
+                this.maxInfant2B = 53;
+                this.baseInfantil3A= 25;
+                this.maxInfant3A = 65;
+                this.baseInfantil3B= 21;
+                this.maxInfant3B = 61;
+                this.baseInfantil3C= 22;
+                this.maxInfant3C = 62;
+                this.baseInfantil3D= 26;
+                this.maxInfant3D = 66;
+                this.baseKids1A= 30;
+                this.maxKids1A = 60;
+                this.baseKids1B= 42;
+                this.maxKids1B = 60;
+                this.baseKids1C= 33;
+                this.maxKids1C = 60;
+                this.baseKids2A= 33;
+                this.maxKids2A = 60;
+                this.baseKids2B= 31;
+                this.maxKids2B = 60;
+                this.baseKids2C= 35;
+                this.maxKids2C = 60;
+                this.baseKids3A= 44;
+                this.maxKids3A = 60;
+                this.baseKids3B= 50;
+                this.maxKids3B = 60;
+                this.baseKids3C= 55;
+                this.maxKids3C = 60;
+                this.baseKids4A= 48;
+                this.maxKids4A = 60;
+                this.baseKids4B= 55;
+                this.maxKids4B = 60;
+                this.baseKids4C= 38;
+                this.maxKids4C = 60;    
+            }
+            if( this.session.name == "2ª Sessão" ){
+                this.baseInfantil1A= 29;
+                this.maxInfant1A = 54;
+                this.baseInfantil1B= 28;
+                this.maxInfant1B = 53;
+                this.baseInfantil2A= 33;
+                this.maxInfant2A = 58;
+                this.baseInfantil2B= 27;
+                this.maxInfant2B = 52;
+                this.baseInfantil3A= 31;
+                this.maxInfant3A = 71;
+                this.baseInfantil3B= 27;
+                this.maxInfant3B = 67;
+                this.baseInfantil3C= 31;
+                this.maxInfant3C = 71;
+                this.baseInfantil3D= 38;
+                this.maxInfant3D = 78;
+                this.baseKids1A= 37;
+                this.maxKids1A = 60;
+                this.baseKids1B= 44;
+                this.maxKids1B = 60;
+                this.baseKids1C= 40;
+                this.maxKids1C = 60;
+                this.baseKids2A= 45;
+                this.maxKids2A = 60;
+                this.baseKids2B= 42;
+                this.maxKids2B = 60;
+                this.baseKids2C= 42;
+                this.maxKids2C = 60;
+                this.baseKids3A= 50;
+                this.maxKids3A = 60;
+                this.baseKids3B= 57;
+                this.maxKids3B = 60;
+                this.baseKids3C= 63;
+                this.maxKids3C = 60;
+                this.baseKids4A= 44;
+                this.maxKids4A = 60;
+                this.baseKids4B= 52;
+                this.maxKids4B = 60;
+                this.baseKids4C= 46;
+                this.maxKids4C = 60;    
+            }
+            if( this.session.name == "3ª Sessão" ){
+                this.baseInfantil1A= 17;
+                this.maxInfant1A = 42;
+                this.baseInfantil1B= 23;
+                this.maxInfant1B = 48;
+                this.baseInfantil2A= 22;
+                this.maxInfant2A = 47;
+                this.baseInfantil2B= 22;
+                this.maxInfant2B = 47;
+                this.baseInfantil3A= 29;
+                this.maxInfant3A = 69;
+                this.baseInfantil3B= 38;
+                this.maxInfant3B = 78;
+                this.baseInfantil3C= 31;
+                this.maxInfant3C = 71;
+                this.baseInfantil3D= 27;
+                this.maxInfant3D = 67;
+                this.baseKids1A= 33;
+                this.maxKids1A = 60;
+                this.baseKids1B= 34;
+                this.maxKids1B = 60;
+                this.baseKids1C= 28;
+                this.maxKids1C = 60;
+                this.baseKids2A= 39;
+                this.maxKids2A = 60;
+                this.baseKids2B= 46;
+                this.maxKids2B = 60;
+                this.baseKids2C= 46;
+                this.maxKids2C = 60;
+                this.baseKids3A= 40;
+                this.maxKids3A = 60;
+                this.baseKids3B= 50;
+                this.maxKids3B = 60;
+                this.baseKids3C= 54;
+                this.maxKids3C = 60;
+                this.baseKids4A= 43;
+                this.maxKids4A = 60;
+                this.baseKids4B= 42;
+                this.maxKids4B = 60;
+                this.baseKids4C= 28;
+                this.maxKids4C = 60;    
+            }
+            if( this.session.name == "4ª Sessão" ){
+                this.baseInfantil1A= 17;
+                this.maxInfant1A = 42;
+                this.baseInfantil1B= 13;
+                this.maxInfant1B = 38;
+                this.baseInfantil2A= 18;
+                this.maxInfant2A = 43;
+                this.baseInfantil2B= 15;
+                this.maxInfant2B = 48;
+                this.baseInfantil3A= 24;
+                this.maxInfant3A = 64;
+                this.baseInfantil3B= 11;
+                this.maxInfant3B = 51;
+                this.baseInfantil3C= 25;
+                this.maxInfant3C = 65;
+                this.baseInfantil3D= 32;
+                this.maxInfant3D = 72;
+                this.baseKids1A= 16;
+                this.baseKids1B= 30;
+                this.baseKids1C= 36;
+                this.baseKids2A= 32;
+                this.baseKids2B= 35;
+                this.baseKids2C= 35;
+                this.baseKids3A= 38;
+                this.baseKids3B= 42;
+                this.baseKids3C= 46;
+                this.baseKids4A= 48;
+                this.baseKids4B= 29;
+                this.baseKids4C= 25;
+                this.maxKids1A = 60;
+                this.maxKids1B = 60;
+                this.maxKids1C = 60;
+                this.maxKids2A = 60;
+                this.maxKids2B = 60;
+                this.maxKids2C = 60;
+                this.maxKids3A = 60;
+                this.maxKids3B = 60;
+                this.maxKids3C = 60;
+                this.maxKids4A = 60;
+                this.maxKids4B = 60;
+                this.maxKids4C = 60;
+            }
+
+
+
 
             //////////////////////////////////
 
@@ -159,77 +416,75 @@ export default {
 
             if(this.idade == 2){
                 this.turmaOptions = [
-                    {name: "Infantil 1-A", count: this.infant1A},
-                    {name: "Infantil 1-B", count: this.infant1B},
-                    {name: "Excendente", count: this.excedente}
+                    {name: "Infantil 1-A", count: this.infant1A, base: this.baseInfantil1A, max: this.maxInfant1A},
+                    {name: "Infantil 1-B", count: this.infant1B, base: this.baseInfantil1B, max: this.maxInfant1B}
                 ]
             }
 
             if(this.idade == 3){
                 this.turmaOptions = [
-                    {name: "Infantil 2-A", count: this.infant2A},
-                    {name: "Infantil 2-B", count: this.infant2B},
-                    {name: "Excendente", count: this.excedente}
+                    {name: "Infantil 2-A", count: this.infant2A, base: this.baseInfantil2A, max: this.maxInfant2A},
+                    {name: "Infantil 2-B", count: this.infant2B, base: this.baseInfantil2B, max: this.maxInfant2B}
                 ]
             }
 
             if( this.idade == 4 ){
                 this.turmaOptions = [
-                    {name: "Infantil 2-A", count: this.infant2A},
-                    {name: "Infantil 2-B", count: this.infant2B},
-                    {name: "Excendente", count: this.excedente}
+                    {name: "Infantil 2-A", count: this.infant2A, base: this.baseInfantil2A, max: this.maxInfant2A},
+                    {name: "Infantil 2-B", count: this.infant2B, base: this.baseInfantil2B, max: this.maxInfant2B}
                 ]
             }
 
             if( this.idade == 5 ){
                 this.turmaOptions = [
-                    {name: "Infantil 3-A", count: this.infant3A},
-                    {name: "Infantil 3-B", count: this.infant3B},
-                    {name: "Infantil 3-C", count: this.infant3C},
-                    {name: "Infantil 3-D", count: this.infant3D},
-                    {name: "Excendente", count: this.excedente}
+                    {name: "Infantil 3-A", count: this.infant3A, base: this.baseInfantil3A, max: this.maxInfant3A},
+                    {name: "Infantil 3-B", count: this.infant3B, base: this.baseInfantil3B, max: this.maxInfant3B},
+                    {name: "Infantil 3-C", count: this.infant3C, base: this.baseInfantil3C, max: this.maxInfant3C},
+                    {name: "Infantil 3-D", count: this.infant3D, base: this.baseInfantil3D, max: this.maxInfant3D}
                 ]                
             }            
 
             if(this.idade == 6 || this.idade == 7){
                 this.turmaOptions = [
-                   {name: "Kids 1-A", count: this.kids1A},
-                   {name: "Kids 1-B", count: this.kids1B},
-                   {name: "Kids 1-C", count: this.kids1C},
-                   {name: "Excedente", count: this.excedente}
+                   {name: "Kids 1-A", count: this.kids1A, base: this.baseKids1A, max: this.maxKids1A},
+                   {name: "Kids 1-B", count: this.kids1B, base: this.baseKids1B, max: this.maxKids1B},
+                   {name: "Kids 1-C", count: this.kids1C, base: this.baseKids1C, max: this.maxKids1C},
+                   {name: "Excedente", count: this.excedente, base: this.baseExcedente, max: this.maxExcedente}
                 ]
             }
 
             if( this.idade == 8 || this.idade == 9){
                 this.turmaOptions = [
-                   {name: "Kids 2-A", count: this.kids2A},
-                   {name: "Kids 2-B", count: this.kids2B},
-                   {name: "Kids 2-C", count: this.kids2C},
-                   {name: "Excedente", count: this.excedente}
+                   {name: "Kids 2-A", count: this.kids2A, base: this.baseKids2A, max: this.maxKids2A},
+                   {name: "Kids 2-B", count: this.kids2B, base: this.baseKids2B, max: this.maxKids2B},
+                   {name: "Kids 2-C", count: this.kids2C, base: this.baseKids2C, max: this.maxKids2C},
+                   {name: "Excedente", count: this.excedente, base: this.baseExcedente, max: this.maxExcedente}
                 ]
             }
 
             if( this.idade == 10 ){
                 this.turmaOptions = [
-                   {name: "Kids 3-A", count: this.kids3A},
-                   {name: "Kids 3-B", count: this.kids3B},
-                   {name: "Kids 3-C", count: this.kids3C},
-                   {name: "Excedente", count: this.excedente}
+                   {name: "Kids 3-A", count: this.kids3A, base: this.baseKids3A, max: this.maxKids3A},
+                   {name: "Kids 3-B", count: this.kids3B, base: this.baseKids3B, max: this.maxKids3B},
+                   {name: "Kids 3-C", count: this.kids3C, base: this.baseKids3C, max: this.maxKids3C},
+                   {name: "Excedente", count: this.excedente, base: this.baseExcedente, max: this.maxExcedente}
                 ]
             }
 
             if( this.idade == 11 ){
                 this.turmaOptions = [
-                   {name: "Kids 4-A", count: this.kids4A},
-                   {name: "Kids 4-B", count: this.kids4B},
-                   {name: "Kids 4-C", count: this.kids4C},
-                   {name: "Excedente", count: this.excedente}
+                   {name: "Kids 4-A", count: this.kids4A, base: this.baseKids4A, max: this.maxKids4A},
+                   {name: "Kids 4-B", count: this.kids4B, base: this.baseKids4B, max: this.maxKids4B},
+                   {name: "Kids 4-C", count: this.kids4C, base: this.baseKids4C, max: this.maxKids4C},
+                   {name: "Excedente", count: this.excedente, base: this.baseExcedente, max: this.maxExcedente}
                 ]
             }
 
             if( this.idade > 11 || this.idade < 2){
                 this.turmaOptions = [];
             }
+
+            console.log(this.maxExcedente, this.excedente) 
         },
         async registerKids(){
             if(!this.dateBorn && !this.turmaKids && !this.session){
@@ -266,13 +521,55 @@ export default {
                 console.error(error)
             })
         },
-        calculatekids(x){
-            if(x + 30 > 70 ){
+        cleanData(){
+            this.baseInfantil1A= null;
+            this.baseInfantil1B= null;
+            this.baseInfantil2A= null;
+            this.baseInfantil2B= null;
+            this.baseInfantil3A= null;
+            this.baseInfantil3B= null;
+            this.baseInfantil3C= null;
+            this.baseInfantil3D= null;
+            this.baseKids1A= null;
+            this.baseKids1B= null;
+            this.baseKids1C= null;
+            this.baseKids2A= null;
+            this.baseKids2B= null;
+            this.baseKids2C= null;
+            this.baseKids3A= null;
+            this.baseKids3B= null;
+            this.baseKids3C= null;
+            this.baseKids4A= null;
+            this.baseKids4B= null;
+            this.baseKids4C= null;
+            this.maxInfant1A= null,
+            this.maxInfant1B= null,
+            this.maxInfant2A= null,
+            this.maxInfant2B= null,
+            this.maxInfant3A= null,
+            this.maxInfant3B= null,
+            this.maxInfant3C= null,
+            this.maxInfant3D= null,
+            this.maxKids1A= null,
+            this.maxKids1B= null,
+            this.maxKids1C= null,
+            this.maxKids2A= null,
+            this.maxKids2B= null,
+            this.maxKids2C= null,
+            this.maxKids3A= null,
+            this.maxKids3B= null,
+            this.maxKids3C= null,
+            this.maxKids4A= null,
+            this.maxKids4B= null,
+            this.maxKids4C= null           
+        },
+        calculatekids(option){
+            if(option.count + option.base > option.max){
                 return 'danger'
-            }return 'success'
+A            }return 'success'
         },
         isDisabled(option) {
-            return option.count + 30 >= 70;
+            return option.count + option.base >= option.max
         },
         async sincroToBack(){
             const options ={
@@ -373,7 +670,7 @@ export default {
                                     <template #option="slotProps">
                                         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                                             <div>{{ slotProps.option.name }}</div>
-                                            <Tag :value="slotProps.option.count + 30" :severity="calculatekids(slotProps.option.count)"></Tag>
+                                            <Tag :value="slotProps.option.count + slotProps.option.base" :severity="calculatekids(slotProps.option.count)"></Tag>
                                         </div>
                                     </template>
                                 </Select>      
