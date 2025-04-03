@@ -109,11 +109,11 @@ export default {
                 return;
             }
 
+            this.turmaOptions = [];
+
             //////////////////////////////////
 
             const filter = this.result[this.session.name]
-            
-            console.log(filter)
 
             this.infant1A = filter["Infantil 1-A"] ?? 0;
             this.infant1B = filter["Infantil 1-B"] ?? 0;
@@ -157,9 +157,6 @@ export default {
 
             this.idade = anos;
 
-
-
-
             if(this.idade == 2){
                 this.turmaOptions = [
                     {name: "Infantil 1-A", count: this.infant1A},
@@ -167,6 +164,7 @@ export default {
                     {name: "Excendente", count: this.excedente}
                 ]
             }
+
             if(this.idade == 3){
                 this.turmaOptions = [
                     {name: "Infantil 2-A", count: this.infant2A},
@@ -191,41 +189,41 @@ export default {
                     {name: "Infantil 3-D", count: this.infant3D},
                     {name: "Excendente", count: this.excedente}
                 ]                
-            }
+            }            
 
-            if( this.idade == 6 ){
+            if(this.idade == 6 || this.idade == 7){
                 this.turmaOptions = [
-                    {name: "Kids 1-A", count: this.kids1A},
-                    {name: "Kids 1-B", count: this.kids1B},
-                    {name: "Kids 1-C", count: this.kids1C},
-                    {name: "Excendente", count: this.excedente}
+                   {name: "Kids 1-A", count: this.kids1A},
+                   {name: "Kids 1-B", count: this.kids1B},
+                   {name: "Kids 1-C", count: this.kids1C},
+                   {name: "Excedente", count: this.excedente}
                 ]
             }
 
-            if( this.kids = 7){
+            if( this.idade == 8 || this.idade == 9){
                 this.turmaOptions = [
-                    {name: "Kids 2-A", count: this.kids2A},
-                    {name: "Kids 2-B", count: this.kids2B},
-                    {name: "Kids 2-C", count: this.kids2C},
-                    {name: "Excendente", count: this.excedente}
+                   {name: "Kids 2-A", count: this.kids2A},
+                   {name: "Kids 2-B", count: this.kids2B},
+                   {name: "Kids 2-C", count: this.kids2C},
+                   {name: "Excedente", count: this.excedente}
                 ]
             }
 
-            if(this.idade == 8 || this.idade == 9){
+            if( this.idade == 10 ){
                 this.turmaOptions = [
-                    {name: "Kids 3-A", count: this.kids3A},
-                    {name: "Kids 3-B", count: this.kids3B},
-                    {name: "Kids 3-C", count: this.kids3C},
-                    {name: "Excendente", count: this.excedente}
+                   {name: "Kids 3-A", count: this.kids3A},
+                   {name: "Kids 3-B", count: this.kids3B},
+                   {name: "Kids 3-C", count: this.kids3C},
+                   {name: "Excedente", count: this.excedente}
                 ]
             }
 
-            if(this.idade == 10 || this.idade == 11){
+            if( this.idade == 11 ){
                 this.turmaOptions = [
-                    {name: "Kids 4-A", count: this.kids4A},
-                    {name: "Kids 4-B", count: this.kids4B},
-                    {name: "Kids 4-C", count: this.kids4C},
-                    {name: "Excendente", count: this.excedente}
+                   {name: "Kids 4-A", count: this.kids4A},
+                   {name: "Kids 4-B", count: this.kids4B},
+                   {name: "Kids 4-C", count: this.kids4C},
+                   {name: "Excedente", count: this.excedente}
                 ]
             }
 
@@ -289,7 +287,7 @@ export default {
             await axios.request(options).then((response) => {
                 console.log(response)
                 this.result = response.data.result
-                this.$toast.add({ severity: 'success', summary: 'Quantide Atualizada', detail: 'Sincronizado com sucesso', life: 3000 });
+                this.$toast.add({ severity: 'success', summary: 'Quantidade Atualizada', detail: 'Sincronizado com sucesso', life: 3000 });
             }).catch((error) => {
                 console.error(error)
             })
