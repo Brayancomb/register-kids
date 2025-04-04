@@ -28,7 +28,7 @@ export default {
                     'X-Parse-REST-API-Key': `${import.meta.env.VITE_API_KEY}`,
                 },
                 data: {
-                    username: this.username,
+                    username: this.username.toLowerCase(),
                     password: this.password
                 }
             }
