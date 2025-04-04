@@ -198,21 +198,21 @@ export default {
 
             if( this.session.name == "1ª Sessão" ){
                 this.baseInfantil1A= 15;
-                this.maxInfant1A = 40;
+                this.maxInfant1A = 45;
                 this.baseInfantil1B= 18;
-                this.maxInfant1B = 43;
+                this.maxInfant1B = 45;
                 this.baseInfantil2A= 27;
-                this.maxInfant2A = 52;
+                this.maxInfant2A = 55;
                 this.baseInfantil2B= 28;
-                this.maxInfant2B = 53;
+                this.maxInfant2B = 55;
                 this.baseInfantil3A= 25;
-                this.maxInfant3A = 65;
+                this.maxInfant3A = 70;
                 this.baseInfantil3B= 21;
-                this.maxInfant3B = 61;
+                this.maxInfant3B = 70;
                 this.baseInfantil3C= 22;
-                this.maxInfant3C = 62;
+                this.maxInfant3C = 70;
                 this.baseInfantil3D= 26;
-                this.maxInfant3D = 66;
+                this.maxInfant3D = 70;
                 this.baseKids1A= 30;
                 this.maxKids1A = 60;
                 this.baseKids1B= 42;
@@ -240,21 +240,21 @@ export default {
             }
             if( this.session.name == "2ª Sessão" ){
                 this.baseInfantil1A= 29;
-                this.maxInfant1A = 54;
+                this.maxInfant1A = 45;
                 this.baseInfantil1B= 28;
-                this.maxInfant1B = 53;
+                this.maxInfant1B = 45;
                 this.baseInfantil2A= 33;
-                this.maxInfant2A = 58;
+                this.maxInfant2A = 55;
                 this.baseInfantil2B= 27;
-                this.maxInfant2B = 52;
+                this.maxInfant2B = 55;
                 this.baseInfantil3A= 31;
-                this.maxInfant3A = 71;
+                this.maxInfant3A = 70;
                 this.baseInfantil3B= 27;
-                this.maxInfant3B = 67;
+                this.maxInfant3B = 70;
                 this.baseInfantil3C= 31;
-                this.maxInfant3C = 71;
+                this.maxInfant3C = 70;
                 this.baseInfantil3D= 38;
-                this.maxInfant3D = 78;
+                this.maxInfant3D = 70;
                 this.baseKids1A= 37;
                 this.maxKids1A = 60;
                 this.baseKids1B= 44;
@@ -282,21 +282,21 @@ export default {
             }
             if( this.session.name == "3ª Sessão" ){
                 this.baseInfantil1A= 17;
-                this.maxInfant1A = 42;
+                this.maxInfant1A = 45;
                 this.baseInfantil1B= 23;
-                this.maxInfant1B = 48;
+                this.maxInfant1B = 45;
                 this.baseInfantil2A= 22;
-                this.maxInfant2A = 47;
+                this.maxInfant2A = 55;
                 this.baseInfantil2B= 22;
-                this.maxInfant2B = 47;
+                this.maxInfant2B = 55;
                 this.baseInfantil3A= 29;
-                this.maxInfant3A = 69;
+                this.maxInfant3A = 70;
                 this.baseInfantil3B= 38;
-                this.maxInfant3B = 78;
+                this.maxInfant3B = 70;
                 this.baseInfantil3C= 31;
-                this.maxInfant3C = 71;
+                this.maxInfant3C = 70;
                 this.baseInfantil3D= 27;
-                this.maxInfant3D = 67;
+                this.maxInfant3D = 70;
                 this.baseKids1A= 33;
                 this.maxKids1A = 60;
                 this.baseKids1B= 34;
@@ -324,21 +324,21 @@ export default {
             }
             if( this.session.name == "4ª Sessão" ){
                 this.baseInfantil1A= 17;
-                this.maxInfant1A = 42;
+                this.maxInfant1A = 45;
                 this.baseInfantil1B= 13;
-                this.maxInfant1B = 38;
+                this.maxInfant1B = 45;
                 this.baseInfantil2A= 18;
-                this.maxInfant2A = 43;
+                this.maxInfant2A = 55;
                 this.baseInfantil2B= 15;
-                this.maxInfant2B = 48;
+                this.maxInfant2B = 55;
                 this.baseInfantil3A= 24;
-                this.maxInfant3A = 64;
+                this.maxInfant3A = 70;
                 this.baseInfantil3B= 11;
-                this.maxInfant3B = 51;
+                this.maxInfant3B = 70;
                 this.baseInfantil3C= 25;
-                this.maxInfant3C = 65;
+                this.maxInfant3C = 70;
                 this.baseInfantil3D= 32;
-                this.maxInfant3D = 72;
+                this.maxInfant3D = 70;
                 this.baseKids1A= 16;
                 this.baseKids1B= 30;
                 this.baseKids1C= 36;
