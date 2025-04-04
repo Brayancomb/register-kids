@@ -130,13 +130,13 @@ export default{
     gap: 20px;
 }
 .organizerButtonItem{
-    width: 100px;
+    min-width: 100px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-radius: 10px;
