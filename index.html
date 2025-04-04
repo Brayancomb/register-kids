@@ -4,9 +4,16 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="src/assets/NK_logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json">
     <title>Kids Day</title>
+    <script>
+      if(typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('pwabuilder-sw.js');
+      }     
+    </script>
   </head>
   <body>
+    <noscript>Você precisa do Javascript habilitado para usar esta página.</noscript>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
