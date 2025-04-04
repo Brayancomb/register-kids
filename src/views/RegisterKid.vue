@@ -370,7 +370,7 @@ export default {
 
             //////////////////////////////////
 
-            const filter = this.result[this.session.name]
+            const filter = this.result[this.session.name] ?? {};
 
             this.infant1A = filter["Infantil 1-A"] ?? 0;
             this.infant1B = filter["Infantil 1-B"] ?? 0;
@@ -626,6 +626,7 @@ A            }return 'success'
                                 optionLabel="name"
                                 placeholder="Sessão"
                                 :invalid="isError"
+                                @update:modelValue="calcularIdade()"
                             />      
                         </div>
                     </div>
@@ -641,6 +642,7 @@ A            }return 'success'
                                         mask="99/99/9999" 
                                         placeholder="dd/mm/yyyy"
                                         :invalid="isError"
+                                        @update:modelValue="calcularIdade()"
                                     />
                                 </div>
                                 <div 
