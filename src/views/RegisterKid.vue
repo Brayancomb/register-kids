@@ -413,7 +413,7 @@ export default {
                 anos--;
             }
 
-            this.idade = anos;
+            this.idade = isNaN(anos) ? "-" : anos;
 
             if(this.idade == 2){
                 this.turmaOptions = [
@@ -763,8 +763,7 @@ A           }else{return 'success'}
                                 </div>
                                 <div class="groupInput">
                                     <span>Telefone :</span>
-                                    <InputMask 
-                                        id="basic" 
+                                    <InputMask
                                         v-model="phoneParent" 
                                         mask="(99)99999-9999" 
                                         placeholder="(**)*****-****" />
