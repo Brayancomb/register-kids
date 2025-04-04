@@ -4,8 +4,8 @@ import MenuBar from '../components/MenuBar.vue';
 import Parse from 'parse/dist/parse.min.js';
 
 //Oficial
-// Parse.initialize("pyJ2pmDqnkg39Pvf2CjhwHmM3SasEAPuZddS1B1b", "21gGRnI6APWZzLXHa51hNb3wcCHFJkwwa1czR9uy");
-// Parse.serverURL = "wss://customkids.b4a.io/";
+Parse.initialize("pyJ2pmDqnkg39Pvf2CjhwHmM3SasEAPuZddS1B1b", "21gGRnI6APWZzLXHa51hNb3wcCHFJkwwa1czR9uy");
+Parse.serverURL = "https://customkids.b4a.io/";
 
 // test.GrupoCidade
 // Parse.initialize("zFnXp8duZFOLBWfnqnj9hPbPcXd1YYBv7155jKyu", "FIFzV9EkueocfjksA9RmdFbPSYuP4WCHHFOFd9L0");
@@ -31,6 +31,7 @@ export default {
             session: null,
             loading: false,
             isError: false,
+            subscription: null,
             familyOptions: [
                 {name: "Pai"},
                 {name: "Mãe"},
@@ -596,7 +597,29 @@ A           }else{return 'success'}
             }).catch((error) => {
                 console.error(error)
             })
-        }
+        },
+        async conectarLiveQuery() {
+            const Turma = Parse.Object.extend("nibCentral");
+            const query = new Parse.Query(Turma);
+
+            try {
+
+                // Conectar ao Live Query
+                this.subscription = await query.subscribe();
+                console.log("Conectado?", this.subscription);
+                // Quando uma nova turma for criada
+                this.subscription.on("create", (novoItem) => {
+                    console.log("Nova turma adicionada:", novoItem);
+                    this.turmas.push({
+                        id: novoItem.id,
+                        sessao: novoItem.get("sessao"),
+                        turma: novoItem.get("turma"),
+                    });
+                });
+            } catch (error) {
+                console.error("Erro ao conectar ao Live Query:", error);
+            }
+        },
     },
     watch:{
         dateBorn(newVal) {
@@ -607,13 +630,38 @@ A           }else{return 'success'}
             }       
         }
     },
-    mounted(){
+   async mounted(){
         this.sincroToBack();
-        this.timer = setInterval(this.sincroToBack, 2* 60 * 1000);
+        // this.timer = setInterval(this.sincroToBack, 2* 60 * 1000);
+        
+        var query = new Parse.Query('nibCentral');
+        let subscription = await query.subscribe();
+
+        subscription.on('create', (object) => {
+            console.log('object created', object.toJSON());
+
+            const sessao = object.get("session");
+            const turma = object.get("turma");
+
+            if (this.result[sessao] && this.result[sessao][turma]) {
+                this.result[sessao][turma] += 1;
+            } else {
+                this.result[sessao][turma] = 1;
+            }
+
+            // Atualiza a estrutura do result com o novo valor
+            this.result = { ...this.result };
+        });
+        subscription.on('open', () => {
+            console.log('subscription opened');
+        });
+        subscription.on('close', () => {
+            console.log('subscription closed');
+        });
     },
     unmounted(){
         clearInterval(this.timer);        
-    }
+    },
 }
 </script>
 
