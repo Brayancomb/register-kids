@@ -183,7 +183,7 @@ export default {
                 })
                 this.clearParentsInfo();
             }else{
-                this.$toast.add({ severity: 'error', summary: 'Erro ao Cadastrar', detail: 'Todas as informações devem ser preenchidas', life: 3000 });
+                this.$toast.add({ severity: 'error', summary: 'Erro ao Cadastrar Pais', detail: 'Todas as informações devem ser preenchidas', life: 3000 });
             }
         },
         calcularIdade() {
@@ -564,12 +564,22 @@ export default {
             this.maxKids4C= null           
         },
         calculatekids(option){
-            if(option.count + option.base > option.max){
-                return 'danger'
-A            }return 'success'
+            const calculate = option.count + option.base
+            if(calculate >= option.max){
+                return 'error'
+A           }else{return 'success'}
         },
         isDisabled(option) {
             return option.count + option.base >= option.max
+        },
+        calculateValue(option){
+
+            const calculate = option.count + option.base
+
+            if(calculate >= option.max){
+                return "LOTADO"
+            } return calculate
+             
         },
         async sincroToBack(){
             const options ={
@@ -672,7 +682,7 @@ A            }return 'success'
                                     <template #option="slotProps">
                                         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                                             <div>{{ slotProps.option.name }}</div>
-                                            <Tag :value="slotProps.option.count + slotProps.option.base" :severity="calculatekids(slotProps.option.count)"></Tag>
+                                            <Tag :value="calculateValue(slotProps.option)" :severity="calculatekids(slotProps.option)"></Tag>
                                         </div>
                                     </template>
                                 </Select>      
@@ -722,10 +732,16 @@ A            }return 'success'
                                         placeholder="Parentesco"
                                     />      
                                 </div>
-                                <Button
-                                    label="Adicionar Responsável"
-                                    @click="CadastrarPais()"
-                                ></Button>
+                                <div style="display: flex; gap: 20px;">
+                                    <Button
+                                        label="Adicionar Responsável"
+                                        @click="CadastrarPais()"
+                                    ></Button>
+                                    <Button
+                                        label="Fechar"
+                                        @click="putParents = false"
+                                    ></Button>
+                                </div>
                             </div>
                         </div>
                     </div>
