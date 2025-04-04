@@ -85,7 +85,7 @@ export default{
     <SpeedDial
         :model="items" 
         direction="up"
-        :style="{ position: 'absolute', right: '1rem', bottom: '1rem' }"
+        :style="{ position: 'fixed', right: '1rem', bottom: '1rem', 'z-index': '100' }"
     >
         <template #item="{ item, toggleCallback }">
             <div class="organizerButtonItem" @click="toggleCallback">
@@ -157,7 +157,8 @@ export default{
 
     }
     .contentMobile{
-        display: block;
+        display: contents;
+        position: fixed; 
     }
 }
 </style>

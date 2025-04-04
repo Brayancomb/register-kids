@@ -483,8 +483,6 @@ export default {
             if( this.idade > 11 || this.idade < 2){
                 this.turmaOptions = [];
             }
-
-            console.log(this.maxExcedente, this.excedente) 
         },
         async registerKids(){
             if(!this.dateBorn && !this.turmaKids && !this.session){
@@ -514,7 +512,7 @@ export default {
 
             await axios.request(options).then((response) => {
                 this.clearAllData();
-                // console.log(response) 
+                console.log(response) 
                 this.loading = false;               
                 this.$toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Cadastro realizado com sucesso', life: 3000 });
             }).catch((error) => {
@@ -690,7 +688,7 @@ A           }else{return 'success'}
                         </div>
 
                         <div 
-                            style="width: 100%;display: flex; flex-direction: column;  align-items: center;" 
+                            style="width: 100%;display: flex; flex-direction: column;  align-items: center; padding: 20px;" 
                         >
                             <Button
                                 label="Dados Adicionais"
