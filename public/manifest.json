@@ -3,6 +3,8 @@
   "theme_color": "#1d77e8",
   "background_color": "#30b6ed",
   "short_name": "Kids Day",
+  "start_url": "https://main.d3mznonjv44265.amplifyapp.com/",
+
   "description": "aplicativo voltado para cumprir a função de cadastro e controle de cadastro dos kids que virão para igreja no Kids Day",
   "categories": [
     "productivity"
