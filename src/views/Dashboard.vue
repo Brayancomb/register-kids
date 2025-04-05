@@ -1,6 +1,11 @@
-<script>
+    <script>
 import axios from 'axios';
 import MenuBar from '../components/MenuBar.vue';
+import Parse from 'parse/dist/parse.min.js';
+
+//Oficial
+Parse.initialize("pyJ2pmDqnkg39Pvf2CjhwHmM3SasEAPuZddS1B1b", "21gGRnI6APWZzLXHa51hNb3wcCHFJkwwa1czR9uy");
+Parse.serverURL = "https://customkids.b4a.io/";
 
 export default{
     components:{
@@ -8,7 +13,8 @@ export default{
     },
     data(){
         return{
-            result:[],
+            result:null,
+            count: 0,
             timer: null      
         }
     },
@@ -29,11 +35,42 @@ export default{
             }).catch((error) => {
                 console.error(error)
             })
+        },
+        addMoreOne(){
+            this.count++
+        },
+        logicInsert(object){
+            const sessao = object.get("session");
+            const turma = object.get("turma");
+
+            if (this.result.sessao && this.result.sessao.turma) {
+                this.result.sessao.turma += 1;
+            } else {
+                this.result.sessao.turma = 1;
+            }
+
+            // Atualiza a estrutura do result com o novo valor
+            this.result = { ...this.result };            
         }
     },
-    mounted(){
-        this.getStatistics();        
-        this.timer = setInterval(this.getStatistics, 2* 60 * 1000);
+    async mounted(){
+        this.getStatistics();   
+        
+        var query = new Parse.Query('nibCentral');
+        let subscription = await query.subscribe();
+
+        subscription.on('create', (object) => {
+            console.log('object created', object.toJSON());
+            this.logicInsert(object)
+        });
+        subscription.on('open', () => {
+            console.log('subscription opened');
+            this.count++
+        });
+        subscription.on('close', () => {
+            console.log('subscription closed');
+        });
+        // this.timer = setInterval(this.getStatistics, 2* 60 * 1000);
     }
 }
 </script>

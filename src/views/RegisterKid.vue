@@ -7,10 +7,6 @@ import Parse from 'parse/dist/parse.min.js';
 Parse.initialize("pyJ2pmDqnkg39Pvf2CjhwHmM3SasEAPuZddS1B1b", "21gGRnI6APWZzLXHa51hNb3wcCHFJkwwa1czR9uy");
 Parse.serverURL = "https://customkids.b4a.io/";
 
-// test.GrupoCidade
-// Parse.initialize("zFnXp8duZFOLBWfnqnj9hPbPcXd1YYBv7155jKyu", "FIFzV9EkueocfjksA9RmdFbPSYuP4WCHHFOFd9L0");
-// Parse.serverURL = "wss://grupocidade.b4a.io/";
-
 
 export default {
     components:{
@@ -195,17 +191,17 @@ export default {
             this.cleanData()
             this.turmaOptions = [];
 
-            ////////////////////////////////////
+            //////////////////////////////////////////////////////////////
 
             if( this.session.name == "1ª Sessão" ){
                 this.baseInfantil1A= 15;
-                this.maxInfant1A = 45;
+                this.maxInfant1A = 500;
                 this.baseInfantil1B= 18;
-                this.maxInfant1B = 45;
+                this.maxInfant1B = 500;
                 this.baseInfantil2A= 27;
-                this.maxInfant2A = 55;
+                this.maxInfant2A = 500;
                 this.baseInfantil2B= 28;
-                this.maxInfant2B = 55;
+                this.maxInfant2B = 500;
                 this.baseInfantil3A= 25;
                 this.maxInfant3A = 70;
                 this.baseInfantil3B= 21;
@@ -241,13 +237,13 @@ export default {
             }
             if( this.session.name == "2ª Sessão" ){
                 this.baseInfantil1A= 29;
-                this.maxInfant1A = 45;
+                this.maxInfant1A = 500;
                 this.baseInfantil1B= 28;
-                this.maxInfant1B = 45;
+                this.maxInfant1B = 500;
                 this.baseInfantil2A= 33;
-                this.maxInfant2A = 55;
+                this.maxInfant2A = 500;
                 this.baseInfantil2B= 27;
-                this.maxInfant2B = 55;
+                this.maxInfant2B = 500;
                 this.baseInfantil3A= 31;
                 this.maxInfant3A = 70;
                 this.baseInfantil3B= 27;
@@ -283,13 +279,13 @@ export default {
             }
             if( this.session.name == "3ª Sessão" ){
                 this.baseInfantil1A= 17;
-                this.maxInfant1A = 45;
+                this.maxInfant1A = 500;
                 this.baseInfantil1B= 23;
-                this.maxInfant1B = 45;
+                this.maxInfant1B = 500;
                 this.baseInfantil2A= 22;
-                this.maxInfant2A = 55;
+                this.maxInfant2A = 500;
                 this.baseInfantil2B= 22;
-                this.maxInfant2B = 55;
+                this.maxInfant2B = 500;
                 this.baseInfantil3A= 29;
                 this.maxInfant3A = 70;
                 this.baseInfantil3B= 38;
@@ -325,13 +321,13 @@ export default {
             }
             if( this.session.name == "4ª Sessão" ){
                 this.baseInfantil1A= 17;
-                this.maxInfant1A = 45;
+                this.maxInfant1A = 500;
                 this.baseInfantil1B= 13;
-                this.maxInfant1B = 45;
+                this.maxInfant1B = 500;
                 this.baseInfantil2A= 18;
-                this.maxInfant2A = 55;
+                this.maxInfant2A = 500;
                 this.baseInfantil2B= 15;
-                this.maxInfant2B = 55;
+                this.maxInfant2B = 500;
                 this.baseInfantil3A= 24;
                 this.maxInfant3A = 70;
                 this.baseInfantil3B= 11;
@@ -369,7 +365,7 @@ export default {
 
 
 
-            //////////////////////////////////
+            /////////////////////////////////////////////////////
 
             const filter = this.result[this.session.name] ?? {};
 
@@ -397,7 +393,7 @@ export default {
             
 
             
-            //////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////
 
             const partes = this.dateBorn.split("/");
             const nascimento = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`);
@@ -565,18 +561,18 @@ export default {
         calculatekids(option){
             const calculate = option.count + option.base
             if(calculate >= option.max){
-                return 'error'
+                return 'danger'
 A           }else{return 'success'}
         },
-        isDisabled(option) {
-            return option.count + option.base >= option.max
-        },
+        // isDisabled(option) {
+        //     return option.count + option.base >= option.max
+        // },
         calculateValue(option){
 
             const calculate = option.count + option.base
 
             if(calculate >= option.max){
-                return "LOTADO"
+                return calculate
             } return calculate
              
         },
@@ -597,29 +593,7 @@ A           }else{return 'success'}
             }).catch((error) => {
                 console.error(error)
             })
-        },
-        async conectarLiveQuery() {
-            const Turma = Parse.Object.extend("nibCentral");
-            const query = new Parse.Query(Turma);
-
-            try {
-
-                // Conectar ao Live Query
-                this.subscription = await query.subscribe();
-                console.log("Conectado?", this.subscription);
-                // Quando uma nova turma for criada
-                this.subscription.on("create", (novoItem) => {
-                    console.log("Nova turma adicionada:", novoItem);
-                    this.turmas.push({
-                        id: novoItem.id,
-                        sessao: novoItem.get("sessao"),
-                        turma: novoItem.get("turma"),
-                    });
-                });
-            } catch (error) {
-                console.error("Erro ao conectar ao Live Query:", error);
-            }
-        },
+        }
     },
     watch:{
         dateBorn(newVal) {
@@ -650,7 +624,7 @@ A           }else{return 'success'}
             }
 
             // Atualiza a estrutura do result com o novo valor
-            this.result = { ...this.result };
+            this.result = { ...this.result }
         });
         subscription.on('open', () => {
             console.log('subscription opened');
@@ -718,7 +692,7 @@ A           }else{return 'success'}
                                     optionLabel="name"
                                     placeholder="Turma"
                                     :invalid="isError"
-                                    :optionDisabled="isDisabled"
+                                    
                                 >
                                     <template #empty>
                                         <div>
