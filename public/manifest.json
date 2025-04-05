@@ -11,6 +11,13 @@
   "categories": [
     "productivity"
   ],
+  "display_override": [
+    "fullscreen",
+    "standalone",
+    "minimal-ui",
+    "browser",
+    "window-controls-overlay"
+  ],
   "icons": [
     {
       "src": "windows11/SmallTile.scale-100.png",
