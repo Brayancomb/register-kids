@@ -721,11 +721,11 @@ A           }else{return 'success'}
                         <div 
                             style="width: 100%;display: flex; flex-direction: column;  align-items: center; padding: 20px;" 
                         >
-                            <Button
+                            <!-- <Button
                                 label="Dados Adicionais"
                                 @click="putParents = true"
                                 v-show="!putParents"
-                            ></Button>
+                            ></Button> -->
                             <div 
                                 v-show="putParents"
                                 style="width: 100%; display: flex; flex-direction: column; align-items: center;"
