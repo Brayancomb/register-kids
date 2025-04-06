@@ -482,7 +482,16 @@ export default {
             }
         },
         async registerKids(){
-            if(!this.dateBorn && !this.turmaKids && !this.session){
+            if(!this.dateBorn){
+                this.isError = true;
+                this.$toast.add({ severity: 'error', summary: 'Informações Obrigatorias', detail: 'Informações marcadas obrigatorias', life: 3000 });
+                return
+            }
+            if(!this.turmaKids){
+                this.isError = true;
+                this.$toast.add({ severity: 'error', summary: 'Informações Obrigatorias', detail: 'Informações marcadas obrigatorias', life: 3000 });
+                return
+            }if(!this.session){
                 this.isError = true;
                 this.$toast.add({ severity: 'error', summary: 'Informações Obrigatorias', detail: 'Informações marcadas obrigatorias', life: 3000 });
                 return
