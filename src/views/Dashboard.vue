@@ -14,7 +14,7 @@ export default{
     data(){
         return{
             result:null,
-            count: 0,
+            total: null,
             timer: null      
         }
     },
@@ -51,10 +51,29 @@ export default{
 
             // Atualiza a estrutura do result com o novo valor
             this.result = { ...this.result };            
+        },
+
+        async totalPerSession(){
+            const options = {
+                url: `${import.meta.env.VITE_URL_MAIN}functions/quantidadeCriancasPorSessao`,
+                method: 'POST',
+                headers: {
+                    'X-Parse-Application-Id': `${import.meta.env.VITE_PARSE_ID}`,
+                    'X-Parse-REST-API-Key': `${import.meta.env.VITE_API_KEY}`,
+                }
+            }
+
+            await axios.request(options).then((response) =>{
+                console.log(response)
+                this.total = [response.data.result]
+            }).catch((error)=>{
+                console.log(error)
+            })
         }
     },
     async mounted(){
-        this.getStatistics();   
+        this.getStatistics();  
+        this.totalPerSession() 
         
         var query = new Parse.Query('nibCentral');
         let subscription = await query.subscribe();
@@ -79,6 +98,18 @@ export default{
     <div class="main">
         <MenuBar></MenuBar>
         <div class="content">
+            <div v-for="(session, i) in total" :key="i" style="width: 100dvw; display: flex; flex-wrap: wrap;">
+                <div 
+                    style="
+                        padding: 20px;
+                        border: 1px solid #353535;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 250px;
+                    "
+                >{{ session }}</div>
+            </div>
             <Accordion :value="['0']" multiple>
                 <AccordionPanel  v-for="(r, i) in result" :key="i" :value="r.session">
                     <AccordionHeader>{{ r.session }}</AccordionHeader>
